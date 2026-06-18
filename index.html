@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta Dünyası | Profesyonel Pastacılık Ekipmanları</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav">
+            <a href="#" class="logo">PastaDünyası</a>
+            <ul class="nav-links">
+                <li><a href="javascript:void(0)" onclick="renderByCategory('chocolate')">Çikolata</a></li>
+                <li><a href="javascript:void(0)" onclick="renderByCategory('molds')">Kalıplar</a></li>
+                <li><a href="javascript:void(0)" onclick="renderByCategory('nozzles')">Duy Setleri</a></li>
+                <li><a href="javascript:void(0)" onclick="renderByCategory('equipment')">Ekipmanlar</a></li>
+            </ul>
+            <div class="cart-icon" id="cartBtn">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <!-- Hero -->
+    <section class="hero"
+        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200'); background-size: cover; background-position: center; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div class="hero-content" style="background: none; box-shadow: none; color: white;">
+            <h1 style="color: white; font-size: 52px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); margin-bottom: 20px;">
+                Profesyonel Pastacılık Dünyası</h1>
+            <p style="font-size: 20px; text-shadow: 0 1px 5px rgba(0,0,0,0.3); max-width: 800px; margin: 0 auto 30px;">
+                En kaliteli ekipmanlarla hayalinizdeki pastaları yaratın.</p>
+            <button class="btn-primary" onclick="scrollToProducts()"
+                style="font-size: 18px; padding: 15px 40px; border-radius: 50px;">Hemen Keşfet</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="main-layout">
+            <!-- Sidebar / Filters -->
+            <aside>
+                <div class="filter-section">
+                    <h3>Kategoriler</h3>
+                    <div class="filter-group">
+                        <label><input type="checkbox" class="cat-filter" value="chocolate" checked> Çikolata</label>
+                        <label><input type="checkbox" class="cat-filter" value="molds" checked> Kalıplar</label>
+                        <label><input type="checkbox" class="cat-filter" value="coloring" checked> Gıda Boyaları</label>
+                        <label><input type="checkbox" class="cat-filter" value="nozzles" checked> Duy Setleri</label>
+                        <label><input type="checkbox" class="cat-filter" value="equipment" checked> Ekipmanlar</label>
+                        <label><input type="checkbox" class="cat-filter" value="sprinkles" checked> Süslemeler</label>
+                        <label><input type="checkbox" class="cat-filter" value="packaging" checked> Ambalaj</label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div id="main-content" style="flex: 1;">
+                <div class="products-grid" id="main-products-grid">
+                    <!-- Products injected by JS -->
+                </div>
+            </div>
+
+            <!-- Product Details Page -->
+            <div id="productDetailsPage"
+                style="display: none; flex: 1; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-left: 10px;">
+                <button class="btn-primary" onclick="backToProducts()"
+                    style="margin-bottom: 20px; background: #95a5a6; border: none; font-size: 14px; padding: 10px 20px;">
+                    <i class="fa-solid fa-arrow-left"></i> Geri Dön
+                </button>
+
+                <div class="details-top" style="display: flex; gap: 40px; flex-wrap: wrap;">
+                    <img id="pd-image" src=""
+                        style="width: 100%; max-width: 400px; height: 400px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div class="details-info" style="flex: 1; min-width: 300px;">
+                        <h2 id="pd-title" style="margin-bottom: 10px; font-size: 28px;"></h2>
+                        <div style="color: #f39c12; margin-bottom: 20px; font-size: 16px;">
+                            <i class="fa-solid fa-star"></i> <span id="pd-rating"
+                                style="font-weight: 600; color: #333;"></span>
+                            <span style="color: #7f8c8d; font-size: 14px;">(<span id="pd-reviews-count"></span>
+                                Değerlendirme)</span>
+                        </div>
+                        <h3 id="pd-price" style="font-size: 32px; margin-bottom: 15px; color: var(--primary);"></h3>
+                        <p id="pd-desc" style="margin-bottom: 25px; color: #555; line-height: 1.6;"></p>
+
+                        <h4 style="margin-bottom: 10px; font-weight: 600; font-size: 16px;">Seçenekler:</h4>
+                        <div id="pd-variants" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px;">
+                            <!-- Variants injected by JS -->
+                        </div>
+
+                        <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                            <div
+                                style="display: flex; align-items: center; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+                                <div style="padding: 10px 15px; background: #f9f9f9; font-weight: 600;">Adet</div>
+                                <input type="number" id="pd-qty" value="1" min="1"
+                                    style="width: 70px; padding: 10px; border: none; outline: none; text-align: center; font-size: 16px;">
+                            </div>
+                            <button class="btn-primary" onclick="addActiveVariantToCart()"
+                                style="flex: 1; font-size: 16px; padding: 15px; border-radius: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                <i class="fa-solid fa-cart-shopping"></i> Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .details-tabs {
+                        border-bottom: 2px solid #eee;
+                        margin-top: 50px;
+                        display: flex;
+                    }
+
+                    .tab-btn {
+                        background: none;
+                        border: none;
+                        padding: 15px 30px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #7f8c8d;
+                        cursor: pointer;
+                        position: relative;
+                    }
+
+                    .tab-btn.active {
+                        color: var(--primary);
+                    }
+
+                    .tab-btn.active::after {
+                        content: '';
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 100%;
+                        height: 2px;
+                        background: var(--primary);
+                    }
+                </style>
+                <div class="details-tabs">
+                    <button class="tab-btn active" onclick="switchTab('specs')">Özellikler</button>
+                    <button class="tab-btn" onclick="switchTab('reviews')">Müşteri Yorumları</button>
+                </div>
+
+                <div id="tab-specs" class="tab-content" style="padding: 30px 10px;">
+                    <table style="width: 100%; border-collapse: collapse; max-width: 600px;">
+                        <tbody id="pd-specs-body"></tbody>
+                    </table>
+                </div>
+
+                <div id="tab-reviews" class="tab-content" style="padding: 30px 10px; display: none;">
+                    <div id="pd-reviews-container"></div>
+                </div>
+            </div>
+        </div> <!-- Closing main-layout -->
+    </div> <!-- Closing container -->
+
+    <!-- Checkout Flow (Hidden by default) -->
+    <div id="checkoutFlow" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="modal-close" onclick="closeCheckout()">&times;</span>
+            <div class="checkout-steps-nav">
+                <div class="step-nav-item active" id="step1-nav">1. Adres</div>
+                <div class="step-nav-item" id="step2-nav">2. Ödeme</div>
+                <div class="step-nav-item" id="step3-nav">3. Onay</div>
+            </div>
+
+            <div id="step1" class="checkout-step active">
+                <h3>Teslimat Bilgileri</h3>
+                <br>
+                <div class="form-group">
+                    <label>Ad Soyad</label>
+                    <input type="text" placeholder="Mehmet Yılmaz">
+                </div>
+                <div class="form-group">
+                    <label>Adres</label>
+                    <textarea rows="3" placeholder="Mahalle, Sokak, No..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Şehir</label>
+                    <input type="text" placeholder="İstanbul">
+                </div>
+                <button class="btn-primary" onclick="nextStep(2)">Ödeme Adımına Geç</button>
+            </div>
+
+            <div id="step2" class="checkout-step" style="display: none;">
+                <h3>Ödeme Bilgileri</h3>
+                <br>
+                <div class="form-group">
+                    <label>Kart Üzerindeki İsim</label>
+                    <input type="text" placeholder="Kart Sahibi">
+                </div>
+                <div class="form-group">
+                    <label>Kart Numarası</label>
+                    <input type="text" placeholder="0000 0000 0000 0000">
+                </div>
+                <div style="display: flex; gap: 20px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Son Kullanma</label>
+                        <input type="text" placeholder="AA/YY">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>CVV</label>
+                        <input type="password" placeholder="***">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="nextStep(3)">Siparişi Tamamla</button>
+            </div>
+
+            <div id="step3" class="checkout-step" style="display: none; text-align: center;">
+                <i class="fa-solid fa-circle-check" style="font-size: 60px; color: #4CAF50; margin-bottom: 20px;"></i>
+                <h3>Siparişiniz Alındı!</h3>
+                <p>En kısa sürede hazırlayıp kargoya vereceğiz.</p>
+                <br>
+                <button class="btn-primary" onclick="closeCheckout()">Alışverişe Devam Et</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modals -->
+    <div id="modal-teslimat" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-teslimat')">&times;</span>
+            <h2>Teslimat Bilgileri</h2>
+            <p>Siparişleriniz 24 saat içerisinde anlaşmalı kargoya teslim edilir. İstanbul içi teslimatlar genellikle
+                1-2 iş günü, diğer iller 2-4 iş günü sürmektedir. 500 TL üzeri tüm siparişlerde kargo ücretsizdir.</p>
+        </div>
+    </div>
+
+    <div id="modal-iade" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-iade')">&times;</span>
+            <h2>İade Koşulları</h2>
+            <p>Satın aldığınız ürünleri, kargoyu teslim aldıktan sonra 14 gün içerisinde orijinal paketini bozmadan iade
+                edebilirsiniz. Hijyen kuralları gereği, açılmış gıda takviyeleri ve tek kullanımlık ürünlerde iade kabul
+                edilmemektedir.</p>
+        </div>
+    </div>
+
+    <div id="modal-sss" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-sss')">&times;</span>
+            <h2>Sıkça Sorulan Sorular</h2>
+            <p><strong>Hangi ödeme yöntemlerini kabul ediyorsunuz?</strong><br>Tüm kredi kartları ve banka havalesi ile
+                ödeme yapabilirsiniz.</p>
+            <p><strong>Ürünleriniz gıda temasına uygun mu?</strong><br>Evet, tüm silikon kalıplarımız ve ekipmanlarımız
+                uluslararası gıda güvenliği sertifikalarına sahiptir.</p>
+        </div>
+    </div>
+
+    <div id="modal-iletisim" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-iletisim')">&times;</span>
+            <h2>Bize Ulaşın</h2>
+            <p>E-posta: destek@pastadunyasi.com</p>
+            <p>Telefon: 0 (850) 123 45 67</p>
+            <p>Adres: Pasta Sokak No:12, Kadıköy, İstanbul</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">PastaDünyası</a>
+                    <p style="margin-top: 20px;">Pasta yapımını bir sanata dönüştüren ekipmanlar. Kalite ve estetiğin
+                        buluşma noktası.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Kategoriler</h4>
+                    <ul>
+                        <li><a href="#duylar">Duylar</a></li>
+                        <li><a href="#kaliplar">Kalıplar</a></li>
+                        <li><a href="#suslemeler">Süslemeler</a></li>
+                        <li><a href="#ekipman">Ekipmanlar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Müşteri Hizmetleri</h4>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="openModal('modal-teslimat')">Teslimat Bilgileri</a>
+                        </li>
+                        <li><a href="javascript:void(0)" onclick="openModal('modal-iade')">İade Koşulları</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('modal-sss')">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="javascript:void(0)" onclick="openModal('modal-iletisim')">İletişim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Bültenimize Katılın</h4>
+                    <p>Yeni ürünler ve indirimlerden haberdar olun.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 10px;">
+                        <input type="email" placeholder="E-posta adresiniz"
+                            style="padding: 10px; border-radius: 5px; border: 1px solid #ddd; flex: 1;">
+                        <button class="btn-primary" style="padding: 10px 20px;">Abone Ol</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PastaDünyası. Tüm hakları saklıdır. Tasarım: Antigravity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Sepetim</h3>
+            <span id="closeCart" style="cursor: pointer; font-size: 24px;">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <!-- Cart items will be injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <span>Toplam:</span>
+            <span id="cartTotal" style="font-weight: 700; color: var(--primary);">0 TL</span>
+        </div>
+        <button class="btn-primary" style="width: 100%; border-radius: 4px;" onclick="startCheckout()">Siparişi
+            Tamamla</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
